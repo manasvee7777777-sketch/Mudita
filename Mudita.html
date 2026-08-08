@@ -1,0 +1,999 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mudita.exe 💙</title>
+
+
+    <style>
+
+        /* =========================
+           GENERAL PAGE
+        ========================= */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+
+            margin: 0;
+
+            min-height: 100vh;
+
+            background: #bfe7f5;
+
+            font-family: "Trebuchet MS", Arial, sans-serif;
+
+            color: #29485a;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            padding: 20px;
+
+        }
+
+
+        /* =========================
+           MAIN WINDOW
+        ========================= */
+
+        .window {
+
+            width: 100%;
+
+            max-width: 650px;
+
+            background: #f8fdff;
+
+            border-radius: 25px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 20px 50px rgba(70, 130, 160, 0.25);
+
+            border: 3px solid #ffffff;
+
+        }
+
+
+        /* =========================
+           TOP BAR
+        ========================= */
+
+        .top-bar {
+
+            background: #9ed8ed;
+
+            padding: 13px 18px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+        }
+
+
+        .dot {
+
+            width: 12px;
+
+            height: 12px;
+
+            border-radius: 50%;
+
+            background: #ffffff;
+
+        }
+
+
+        .window-title {
+
+            margin-left: 8px;
+
+            font-size: 13px;
+
+            color: #477489;
+
+        }
+
+
+        /* =========================
+           CONTENT
+        ========================= */
+
+        .content {
+
+            padding: 35px 30px 40px;
+
+            text-align: center;
+
+        }
+
+
+        h1 {
+
+            margin: 0;
+
+            font-size: 32px;
+
+            color: #4285a3;
+
+            letter-spacing: 1px;
+
+        }
+
+
+        .subtitle {
+
+            margin-top: 8px;
+
+            color: #789baa;
+
+            font-size: 14px;
+
+        }
+
+
+        /* =========================
+           WELCOME SCREEN
+        ========================= */
+
+        #welcome {
+
+            margin-top: 35px;
+
+        }
+
+
+        .cute-message {
+
+            background: #e6f7fc;
+
+            border-radius: 18px;
+
+            padding: 20px;
+
+            margin-bottom: 25px;
+
+            line-height: 1.7;
+
+            font-size: 15px;
+
+        }
+
+
+        .start-button {
+
+            border: none;
+
+            background: #75bfdc;
+
+            color: white;
+
+            padding: 13px 25px;
+
+            border-radius: 30px;
+
+            font-family: inherit;
+
+            font-size: 15px;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+
+        }
+
+
+        .start-button:hover {
+
+            transform: translateY(-2px);
+
+            background: #5eaccb;
+
+        }
+
+
+        /* =========================
+           TERMINAL
+        ========================= */
+
+        #diagnostic {
+
+            display: none;
+
+            text-align: left;
+
+            margin-top: 30px;
+
+        }
+
+
+        .terminal {
+
+            background: #eefaff;
+
+            border: 2px solid #c5e9f5;
+
+            border-radius: 18px;
+
+            padding: 20px;
+
+            min-height: 180px;
+
+            font-family: "Courier New", monospace;
+
+            font-size: 14px;
+
+            line-height: 1.8;
+
+        }
+
+
+        .terminal-line {
+
+            opacity: 0;
+
+            animation: appear 0.4s forwards;
+
+        }
+
+
+        @keyframes appear {
+
+            from {
+
+                opacity: 0;
+
+                transform: translateY(4px);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform: translateY(0);
+
+            }
+
+        }
+
+
+        .success {
+
+            color: #4d9b72;
+
+        }
+
+
+        .warning {
+
+            color: #d29b45;
+
+        }
+
+
+        /* =========================
+           LOADING BAR
+        ========================= */
+
+        .loading-container {
+
+            margin-top: 18px;
+
+            height: 12px;
+
+            background: #dff3fa;
+
+            border-radius: 20px;
+
+            overflow: hidden;
+
+        }
+
+
+        .loading-bar {
+
+            height: 100%;
+
+            width: 0%;
+
+            background: #75bfdc;
+
+            border-radius: 20px;
+
+            transition: width 0.5s;
+
+        }
+
+
+        /* =========================
+           RESULTS
+        ========================= */
+
+        #results {
+
+            display: none;
+
+            margin-top: 30px;
+
+            text-align: left;
+
+        }
+
+
+        .diagnosis-title {
+
+            text-align: center;
+
+            color: #4285a3;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .result {
+
+            background: #eefaff;
+
+            border: 2px solid #d6f0f8;
+
+            border-radius: 16px;
+
+            padding: 15px 18px;
+
+            margin-bottom: 10px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 15px;
+
+        }
+
+
+        .result-name {
+
+            color: #678c9b;
+
+            font-size: 14px;
+
+        }
+
+
+        .result-value {
+
+            color: #4285a3;
+
+            font-weight: bold;
+
+            text-align: right;
+
+        }
+
+
+        /* =========================
+           FINAL MESSAGE
+        ========================= */
+
+        .final-box {
+
+            margin-top: 25px;
+
+            background: #e5f7fc;
+
+            border-radius: 20px;
+
+            padding: 25px;
+
+            text-align: center;
+
+        }
+
+
+        .final-text {
+
+            color: #4285a3;
+
+            font-size: 20px;
+
+            font-weight: bold;
+
+            line-height: 1.5;
+
+        }
+
+
+        .heart {
+
+            color: #ffd83d;
+
+            font-size: 48px;
+
+            display: block;
+
+            margin-top: 10px;
+
+            animation: heartbeat 1.2s infinite;
+
+        }
+
+
+        @keyframes heartbeat {
+
+            0% {
+
+                transform: scale(1);
+
+            }
+
+            15% {
+
+                transform: scale(1.15);
+
+            }
+
+            30% {
+
+                transform: scale(1);
+
+            }
+
+            45% {
+
+                transform: scale(1.12);
+
+            }
+
+            60% {
+
+                transform: scale(1);
+
+            }
+
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        .footer {
+
+            margin-top: 25px;
+
+            text-align: center;
+
+            font-size: 12px;
+
+            color: #9bb5bf;
+
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 500px) {
+
+            .content {
+
+                padding: 28px 18px 30px;
+
+            }
+
+            h1 {
+
+                font-size: 27px;
+
+            }
+
+            .result {
+
+                flex-direction: column;
+
+                align-items: flex-start;
+
+            }
+
+            .result-value {
+
+                text-align: left;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="window">
+
+
+    <!-- TOP BAR -->
+
+    <div class="top-bar">
+
+        <div class="dot"></div>
+
+        <div class="dot"></div>
+
+        <div class="dot"></div>
+
+        <span class="window-title">
+
+            
+            
+            
+            Mudita.exe — system diagnostic
+
+        </span>
+
+    </div>
+
+
+
+    <!-- MAIN CONTENT -->
+
+    <div class="content">
+
+
+        <h1>
+            Mudita.EXE</h1>
+
+        <div class="subtitle">
+
+            Personal Relationship Diagnostic System
+
+        </div>
+
+
+
+        <!-- =========================
+             WELCOME SCREEN
+        ========================= -->
+
+        <div id="welcome">
+
+
+            <div class="cute-message">
+
+                <strong>System detected.</strong>
+
+                <br><br>
+
+                A rather important person has been
+                detected in the user's life.
+
+                <br><br>
+
+                Running a completely unbiased,
+                scientifically questionable investigation.
+
+                <br><br>
+
+                <span>
+                    Please proceed with caution.
+                </span>
+
+            </div>
+
+
+            <button
+                class="start-button"
+                id="startButton">
+
+                RUN DIAGNOSTIC
+
+            </button>
+
+
+        </div>
+
+
+
+        <!-- =========================
+             DIAGNOSTIC SCREEN
+        ========================= -->
+
+        <div id="diagnostic">
+
+
+            <div
+                class="terminal"
+                id="terminal">
+
+            </div>
+
+
+            <div class="loading-container">
+
+                <div
+                    class="loading-bar"
+                    id="loadingBar">
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =========================
+             FINAL RESULTS
+        ========================= -->
+
+        <div id="results">
+
+
+            <h2 class="diagnosis-title">
+
+                FINAL DIAGNOSIS
+
+            </h2>
+
+
+
+            <div class="result">
+
+                <span class="result-name">
+
+                    Favourite Person
+
+                </span>
+
+                <span class="result-value">
+
+                    CONFIRMED ✓
+
+                </span>
+
+            </div>
+
+
+
+            <div class="result">
+
+                <span class="result-name">
+
+                    Replaceability
+
+                </span>
+
+                <span class="result-value">
+
+                    0% — SEARCH TERMINATED
+
+                </span>
+
+            </div>
+
+
+
+            <div class="result">
+
+                <span class="result-name">
+
+                    Importance
+
+                </span>
+
+                <span class="result-value">
+
+                    CRITICALLY HIGH
+
+                </span>
+
+            </div>
+
+
+
+            <div class="result">
+
+                <span class="result-name">
+
+                    Priority
+
+                </span>
+
+                <span class="result-value">
+
+                    #1 — NON-NEGOTIABLE
+
+                </span>
+
+            </div>
+
+
+
+            <div class="result">
+
+                <span class="result-name">
+
+                    Escape Route
+
+                </span>
+
+                <span class="result-value">
+
+                    NOT FOUND
+
+                </span>
+
+            </div>
+
+
+
+            <!-- FINAL -->
+
+            <div class="final-box">
+
+
+                <div class="final-text">
+
+                    Diagnosis complete.
+
+                    <br>
+
+                    You are permanently installed
+                    in my life.
+
+                    <br>
+
+                    Uninstallation is not supported.
+
+                </div>
+
+
+                <span class="heart">
+
+                    💛
+
+                </span>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <div class="footer">
+
+            System accuracy: questionable.
+            Feelings: unfortunately very accurate.
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
+<script>
+
+
+    /* Messages shown during the scan */
+
+    const messages = [
+
+        {
+            text: "> Initialising system...",
+            type: ""
+        },
+
+        {
+            text: "> Scanning emotional parameters...",
+            type: ""
+        },
+
+        {
+            text: "> Checking favourite person...",
+            type: "success"
+        },
+
+        {
+            text: "> Checking importance...",
+            type: "success"
+        },
+
+        {
+            text: "> Checking priority...",
+            type: "success"
+        },
+
+        {
+            text: "> Searching for replacement...",
+            type: ""
+        },
+
+        {
+            text: "> ERROR: No suitable replacement found.",
+            type: "warning"
+        },
+
+        {
+            text: "> Searching for escape route...",
+            type: ""
+        },
+
+        {
+            text: "> ERROR: Escape route not found.",
+            type: "warning"
+        },
+
+        {
+            text: "> Finalising diagnosis...",
+            type: "success"
+        }
+
+    ];
+
+
+    /* Get the things we need from the page */
+
+    const startButton =
+        document.getElementById("startButton");
+
+    const welcome =
+        document.getElementById("welcome");
+
+    const diagnostic =
+        document.getElementById("diagnostic");
+
+    const terminal =
+        document.getElementById("terminal");
+
+    const loadingBar =
+        document.getElementById("loadingBar");
+
+    const results =
+        document.getElementById("results");
+
+
+
+    /* What happens when she clicks the button */
+
+    startButton.addEventListener("click", function() {
+
+
+        /* Hide welcome screen */
+
+        welcome.style.display = "none";
+
+
+        /* Show diagnostic */
+
+        diagnostic.style.display = "block";
+
+
+        /* Start the messages */
+
+        runDiagnostic();
+
+    });
+
+
+
+    /* Diagnostic function */
+
+    function runDiagnostic() {
+
+
+        let i = 0;
+
+
+        function nextMessage() {
+
+
+            if (i < messages.length) {
+
+
+                /* Create a new line */
+
+                const line =
+                    document.createElement("div");
+
+
+                line.className =
+                    "terminal-line " +
+                    messages[i].type;
+
+
+                line.textContent =
+                    messages[i].text;
+
+
+                terminal.appendChild(line);
+
+
+
+                /* Update loading bar */
+
+                const percentage =
+                    ((i + 1) / messages.length) * 100;
+
+
+                loadingBar.style.width =
+                    percentage + "%";
+
+
+
+                /* Move to next message */
+
+                i++;
+
+
+                /* Wait before showing next */
+
+                setTimeout(
+                    nextMessage,
+                    750
+                );
+
+
+            } else {
+
+
+                /* Scan finished */
+
+                setTimeout(function() {
+
+                    results.style.display = "block";
+
+                    results.scrollIntoView({
+                        behavior: "smooth"
+                    });
+
+                }, 800);
+
+            }
+
+        }
+
+
+        nextMessage();
+
+    }
+
+
+</script>
+
+
+</body>
+
+</html>
